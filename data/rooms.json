@@ -1,0 +1,19 @@
+{
+    "rooms": [
+        {
+            "id": 0,
+            "room_name": "RHB100",
+            "building": "Whitehead",
+            "capacity": 100,
+            "floor": 0,
+            "room_type": "Lecture",
+            "department_exclusive": false,
+            "features": [
+                "projector", "outlets"
+            ],
+            "accessibility": [
+                "step-free", "hearing-loop"
+            ]
+        }
+    ]
+}
