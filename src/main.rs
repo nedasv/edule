@@ -17,7 +17,7 @@ impl<'r> FromRequest<'r> for ApiKey {
             Some(key) if key == "my-secret-key" => Outcome::Success(ApiKey),
             _ => Outcome::Error((Status::Unauthorized, "Invalid or missing API key")),
         }
-    }
+    } 
 }
 
 #[get("/")]
@@ -34,5 +34,6 @@ fn unauthorized() -> &'static str {
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![get_json])
+        .mount("/static", FileServer::from("static"))
         .register("/", catchers![unauthorized])
 }
