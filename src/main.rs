@@ -1,11 +1,30 @@
 #[macro_use] extern crate rocket;
 
-use rocket::fs::NamedFile;
+use rocket::fs::{NamedFile, FileServer};
 use std::path::Path;
 use rocket::http::Status;
 use rocket::request::{FromRequest, Outcome, Request};
+// use sqlx::mysql::MySqlPoolOptions;
+// use sqlx::MySqlPool;
 
 struct ApiKey;
+
+// // Mysql 
+// #[derive(Debug, Deserialize, Serialize, Clone)]
+// struct Room {
+//     id: i64,
+//     room_name: String,
+//     building: String,
+//     capacity: i64,
+//     floor: i64,
+//     room_type: String,
+//     department_exclusive: bool,
+//     features: Vec<String>,
+//     accessibility: Vec<String>,
+// }
+
+// // Database init
+// async fn 
 
 // Basic authentication setup, requires "X-API-Key" header with "my-secret-key" as content to return content
 #[rocket::async_trait]
@@ -21,6 +40,11 @@ impl<'r> FromRequest<'r> for ApiKey {
 }
 
 #[get("/")]
+async fn index() -> Option<NamedFile> {
+    NamedFile::open(Path::new("static/index.html")).await.ok()
+}
+
+#[get("/api")]
 async fn get_json(_key: ApiKey) -> Option<NamedFile> {
     NamedFile::open(Path::new("data/rooms.json")).await.ok()
 }
@@ -33,7 +57,7 @@ fn unauthorized() -> &'static str {
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![get_json])
+        .mount("/", routes![index, get_json])
         .mount("/static", FileServer::from("static"))
         .register("/", catchers![unauthorized])
 }
