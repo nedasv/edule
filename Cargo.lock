@@ -472,6 +472,7 @@ dependencies = [
  "bcrypt",
  "chrono",
  "csv",
+ "dotenvy",
  "jsonwebtoken",
  "printpdf",
  "rand",
