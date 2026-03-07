@@ -3,6 +3,8 @@
 use dotenvy::dotenv;
 mod db;
 mod models;
+mod auth;
+mod routes;
 
 #[get("/")]
 fn index() -> &'static str {
@@ -19,4 +21,7 @@ async fn rocket() -> _ {
     rocket::build()
         .manage(pool)
         .mount("/", routes![index])
+        .mount("/api/test", routes![
+            routes::test_routes::ping,
+        ])
 }
