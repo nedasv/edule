@@ -23,5 +23,7 @@ async fn rocket() -> _ {
         .mount("/", routes![index])
         .mount("/api/test", routes![
             routes::test_routes::ping,
+            routes::test_routes::test_users,
+            routes::test_routes::insert_user,
         ])
 }
