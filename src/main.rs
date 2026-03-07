@@ -25,5 +25,8 @@ async fn rocket() -> _ {
             routes::test_routes::ping,
             routes::test_routes::test_users,
             routes::test_routes::insert_user,
+            routes::test_routes::create_token_test, // curl http://localhost:8000/api/test/create-token
+            routes::test_routes::verify_token_test, // curl http://localhost:8000/api/test/verify-token/TOKEN_HERE
+            routes::test_routes::invalid_token_test, // curl http://localhost:8000/api/test/verify-invalid-token
         ])
 }
