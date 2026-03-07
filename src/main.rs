@@ -2,6 +2,7 @@
 
 use dotenvy::dotenv;
 mod db;
+mod models;
 
 #[get("/")]
 fn index() -> &'static str {
