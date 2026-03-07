@@ -27,3 +27,25 @@ pub struct Department {
     pub description: Option<String>,
     pub is_active: bool,
 }
+
+#[derive(Debug, Deserialize)]
+pub struct CreateDepartment {
+    pub name: String,
+    pub head_of_department_id: Option<i32>,
+    pub building_id: Option<i32>,
+    pub description: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, sqlx::FromRow)]
+pub struct RoomType {
+    pub id: i32,
+    pub name: String,
+    pub description: Option<String>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct CreateRoomType {
+    pub name: String,
+    pub description: Option<String>,
+}
+
