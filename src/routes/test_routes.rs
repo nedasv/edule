@@ -84,3 +84,17 @@ pub async fn invalid_token_test() -> Json<Value> {
         })),
     }
 }
+
+// Gets token for each role to use for testing
+#[get("/tokens")]
+pub async fn get_tokens() -> Json<Value> {
+    let admin = auth::create_token(1, "admin", "admin").unwrap_or_default();
+    let staff = auth::create_token(2, "staff", "staffuser").unwrap_or_default();
+    let student = auth::create_token(3, "student", "studentuser").unwrap_or_default();
+
+    Json(json!({
+        "admin_token": admin,
+        "staff_token": staff,
+        "student_token": student,
+    }))
+}

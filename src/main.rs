@@ -50,6 +50,29 @@ async fn rocket() -> _ {
             routes::auth_routes::register,
             routes::auth_routes::me,
         ])
+        .mount("/api/departments", routes![
+            routes::department_routes::list,
+            routes::department_routes::get,
+            routes::department_routes::create,
+            routes::department_routes::update,
+            routes::department_routes::delete,
+        ])
+        .mount("/api/room-types", routes![
+            routes::room_type_routes::list,
+            routes::room_type_routes::create,
+            routes::room_type_routes::delete,
+            routes::room_type_routes::update, 
+        ])
+        .mount("/api/rooms", routes![
+            routes::room_routes::list_buildings,
+            routes::room_routes::create_building,
+            routes::room_routes::list_rooms,
+            routes::room_routes::get_room,
+            routes::room_routes::create_room,
+            routes::room_routes::update_room,
+            routes::room_routes::delete_room,
+            routes::room_routes::import_rooms_json,
+        ])
         .mount("/api/test", routes![
             routes::test_routes::ping,
             routes::test_routes::test_users,
@@ -57,5 +80,6 @@ async fn rocket() -> _ {
             routes::test_routes::create_token_test, // curl http://localhost:8000/api/test/create-token
             routes::test_routes::verify_token_test, // curl http://localhost:8000/api/test/verify-token/TOKEN_HERE
             routes::test_routes::invalid_token_test, // curl http://localhost:8000/api/test/verify-invalid-token
+            routes::test_routes::get_tokens,
         ])
 }
